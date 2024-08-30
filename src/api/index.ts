@@ -6,7 +6,12 @@ export const fetchData = () => {
         method: 'get'
     });
 };
-
+export const bannerList = () => {
+    return request({
+        url: './mock/banner.json',
+        method: 'get'
+    });
+};
 export const fetchUserData = () => {
     return request({
         url: './mock/user.json',
