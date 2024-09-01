@@ -122,15 +122,15 @@ const routes: RouteRecordRaw[] = [
                 },
                 component: () => import(/* webpackChunkName: "editor" */ '../views/pages/editor.vue'),
             },
-            // {
-            //     path: '/markdown',
-            //     name: 'markdown',
-            //     meta: {
-            //         title: 'markdown编辑器',
-            //         permiss: '292',
-            //     },
-            //     component: () => import(/* webpackChunkName: "markdown" */ '../views/pages/markdown.vue'),
-            // },
+            {
+                path: '/markdown',
+                name: 'markdown',
+                meta: {
+                    title: 'markdown编辑器',
+                    permiss: '292',
+                },
+                component: () => import(/* webpackChunkName: "markdown" */ '../views/pages/markdown.vue'),
+            },
             // {
             //     path: '/export',
             //     name: 'export',
@@ -167,15 +167,15 @@ const routes: RouteRecordRaw[] = [
             //     },
             //     component: () => import(/* webpackChunkName: "calendar" */ '../views/element/calendar.vue'),
             // },
-            // {
-            //     path: '/watermark',
-            //     name: 'watermark',
-            //     meta: {
-            //         title: '水印',
-            //         permiss: '25',
-            //     },
-            //     component: () => import(/* webpackChunkName: "watermark" */ '../views/element/watermark.vue'),
-            // },
+            {
+                path: '/watermark',
+                name: 'watermark',
+                meta: {
+                    title: '水印',
+                    permiss: '25',
+                },
+                component: () => import(/* webpackChunkName: "watermark" */ '../views/element/watermark.vue'),
+            },
             // {
             //     path: '/carousel',
             //     name: 'carousel',
@@ -203,15 +203,15 @@ const routes: RouteRecordRaw[] = [
             //     },
             //     component: () => import(/* webpackChunkName: "steps" */ '../views/element/steps.vue'),
             // },
-            // {
-            //     path: '/form',
-            //     name: 'forms',
-            //     meta: {
-            //         title: '表单',
-            //         permiss: '21',
-            //     },
-            //     component: () => import(/* webpackChunkName: "form" */ '../views/element/form.vue'),
-            // },
+            {
+                path: '/form',
+                name: 'forms',
+                meta: {
+                    title: '表单',
+                    permiss: '21',
+                },
+                component: () => import(/* webpackChunkName: "form" */ '../views/element/form.vue'),
+            },
             // {
             //     path: '/upload',
             //     name: 'upload',

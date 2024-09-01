@@ -1,5 +1,7 @@
 import { createApp } from 'vue';
+// @ts-ignore
 import { createPinia } from 'pinia';
+// @ts-ignore
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 import App from './App.vue';
 import router from './router';
