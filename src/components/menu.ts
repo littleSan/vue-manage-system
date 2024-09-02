@@ -66,7 +66,7 @@ export const menuData: Menus[] = [
             {
                 id: '25',
                 pid: '2',
-                index: '/watermark',
+                index: '/upload',
                 title: '友商管理',
             },
         ],

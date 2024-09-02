@@ -86,7 +86,8 @@ const page = reactive({
 const tableData = ref<BannerItem[]>([]);
 
 const getData = async () => {
-  const res = await bannerList()
+  let parma = {'type':1}
+  const res = await bannerList(parma)
   tableData.value = res.data.list;
 };
 getData();

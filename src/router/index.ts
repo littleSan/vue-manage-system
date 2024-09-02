@@ -212,15 +212,15 @@ const routes: RouteRecordRaw[] = [
                 },
                 component: () => import(/* webpackChunkName: "form" */ '../views/element/form.vue'),
             },
-            // {
-            //     path: '/upload',
-            //     name: 'upload',
-            //     meta: {
-            //         title: '上传',
-            //         permiss: '22',
-            //     },
-            //     component: () => import(/* webpackChunkName: "upload" */ '../views/element/upload.vue'),
-            // },
+            {
+                path: '/upload',
+                name: 'upload',
+                meta: {
+                    title: '上传',
+                    permiss: '22',
+                },
+                component: () => import(/* webpackChunkName: "upload" */ '../views/element/upload.vue'),
+            },
             // {
             //     path: '/statistic',
             //     name: 'statistic',
