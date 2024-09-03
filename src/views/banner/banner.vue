@@ -88,6 +88,7 @@ const tableData = ref<BannerItem[]>([]);
 const getData = async () => {
   let parma = {'type':1}
   const res = await bannerList(parma)
+  console.log("test"+res.data)
   tableData.value = res.data.list;
 };
 getData();

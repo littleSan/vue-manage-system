@@ -9,7 +9,6 @@ export const fetchData = () => {
 export const bannerList = (param) => {
     return request({
         url: baseUri+'/api/banner/list',
-        // url: './mock/banner.json',
         method: 'get',
         params:param
     });
