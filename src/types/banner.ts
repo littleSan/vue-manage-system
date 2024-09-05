@@ -1,7 +1,8 @@
 export interface BannerItem {
     id: number;
-    sourceId: number;
+    informationId: number;
     url: string;
     createTime: string;
     weight: string;
+    type:number;
 }

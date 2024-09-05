@@ -1,5 +1,4 @@
 import request from '../utils/request';
-const  baseUri = "http://localhost:18080"
 export const fetchData = () => {
     return request({
         url: './mock/table.json',
@@ -8,7 +7,7 @@ export const fetchData = () => {
 };
 export const bannerList = (param) => {
     return request({
-        url: baseUri+'/api/banner/list',
+        url: '/api/banner/list',
         method: 'get',
         params:param
     });

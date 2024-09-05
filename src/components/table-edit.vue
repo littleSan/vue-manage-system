@@ -97,6 +97,10 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (response, uploadFile) => 
 	transition: var(--el-transition-duration-fast);
 }
 
+.avatar {
+  width: 100%;
+}
+
 .avatar-uploader .el-upload:hover {
 	border-color: var(--el-color-primary);
 }

@@ -8,11 +8,8 @@
         <template #toolbarBtn>
           <el-button type="warning" :icon="CirclePlusFilled" @click="visible = true">新增</el-button>
         </template>
-        <template #money="{ rows }">
-          ￥{{ rows.money }}
-        </template>
         <template #thumb="{ rows }">
-          <el-image class="table-td-thumb" :src="rows.thumb" :z-index="10" :preview-src-list="[rows.thumb]"
+          <el-image class="table-td-thumb" :src="rows.url" :z-index="10" :preview-src-list="[rows.url]"
                     preview-teleported>
           </el-image>
         </template>
@@ -73,8 +70,9 @@ let columns = ref([
   { type: 'selection' },
   { type: 'index', label: '序号', width: 55, align: 'center' },
   { prop: 'sourceId', label: '资源ID' },
-  { prop: 'url', label: '图片' },
+  { prop: 'url', label: '图片地址' },
   { prop: 'createTime', label: '创建时间' },
+  { prop: 'type', label: '类型' },
   { prop: 'weight', label: '权重' },
   { prop: 'operator', label: '操作', width: 250 },
 ])
@@ -86,10 +84,10 @@ const page = reactive({
 const tableData = ref<BannerItem[]>([]);
 
 const getData = async () => {
-  let parma = {'type':1}
-  const res = await bannerList(parma)
-  console.log("test"+res.data)
-  tableData.value = res.data.list;
+
+  const res = await bannerList({})
+  console.log("res",res.data.data)
+  tableData.value = res.data.data;
 };
 getData();
 
@@ -103,10 +101,10 @@ let options = ref<FormOption>({
   labelWidth: '100px',
   span: 24,
   list: [
-    { type: 'input', label: '用户名', prop: 'name', required: true },
-    { type: 'number', label: '资源', prop: 'sourceId', required: true },
-    { type: 'switch', activeText: '正常', inactiveText: '异常', label: '账户状态', prop: 'state', required: true },
+    { type: 'input', label: '资源', prop: 'informationId', required: true },
+    // { type: 'switch', activeText: '正常', inactiveText: '异常', label: '账户状态', prop: 'state', required: true },
     { type: 'upload', label: 'banner', prop: 'url', required: true },
+    { type: 'select', label: '类型', prop: 'type', required: true ,opts:[{label:'系统',value: 1},{label:'产品',value:2}]},
   ]
 })
 const visible = ref(false);
@@ -141,7 +139,7 @@ const handleView = (row: BannerItem) => {
       label: 'bannerId',
     },
     {
-      prop: 'sourceId',
+      prop: 'informationId',
       label: '资源ID',
     },
     {
@@ -155,6 +153,10 @@ const handleView = (row: BannerItem) => {
     {
       prop: 'weight',
       label: '权重',
+    },
+    {
+      prop: 'type',
+      label: '类型',
     },
   ]
   visible1.value = true;

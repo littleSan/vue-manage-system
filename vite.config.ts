@@ -28,4 +28,18 @@ export default defineConfig({
 	define: {
 		__VUE_PROD_HYDRATION_MISMATCH_DETAILS__: "true",
 	},
+	server: {
+		cors: true,
+		open: true,
+		proxy: {
+			'/api': {
+				// target: 'https://dimei-med.com/dmf/',   //代理接口
+				target: 'http://127.0.0.1:18080',   //代理接口
+				changeOrigin: true,
+				rewrite: (path) => path.replace(/^\/api/, '/api/')
+			}
+		}
+	},
 });
+
+
