@@ -7,7 +7,8 @@ import 'nprogress/nprogress.css';
 const routes: RouteRecordRaw[] = [
     {
         path: '/',
-        redirect: '/dashboard',
+        redirect: '/login',
+        // redirect: '/dashboard',
     },
     {
         path: '/',
@@ -121,6 +122,15 @@ const routes: RouteRecordRaw[] = [
                     permiss: '291',
                 },
                 component: () => import(/* webpackChunkName: "editor" */ '../views/pages/editor.vue'),
+            },
+            {
+                path: '/information',
+                name: 'information',
+                meta: {
+                    title: '文章',
+                    permiss: '291',
+                },
+                component: () => import(/* webpackChunkName: "information" */ '../views/information/information.vue'),
             },
             {
                 path: '/markdown',

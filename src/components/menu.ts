@@ -57,10 +57,11 @@ export const menuData: Menus[] = [
                 index: '/table-editor',
                 title: '产品管理',
             },
+
             {
                 id: '24',
                 pid: '2',
-                index: '/editor',
+                index: '/information',
                 title: '文章管理',
             },
             {
@@ -68,6 +69,12 @@ export const menuData: Menus[] = [
                 pid: '2',
                 index: '/upload',
                 title: '友商管理',
+            },
+            {
+                id: '26',
+                pid: '2',
+                index: '/editor',
+                title: '富文本',
             },
         ],
     },

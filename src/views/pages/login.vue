@@ -7,7 +7,7 @@
             </div>
             <el-form :model="param" :rules="rules" ref="login" size="large">
                 <el-form-item prop="username">
-                    <el-input v-model="param.username" placeholder="用户名">
+                    <el-input v-model="param.account" placeholder="用户名">
                         <template #prepend>
                             <el-icon>
                                 <User />
@@ -34,10 +34,10 @@
                     <el-link type="primary" @click="$router.push('/reset-pwd')">忘记密码</el-link>
                 </div>
                 <el-button class="login-btn" type="primary" size="large" @click="submitForm(login)">登录</el-button>
-                <p class="login-tips">Tips : 用户名和密码随便填。</p>
-                <p class="login-text">
-                    没有账号？<el-link type="primary" @click="$router.push('/register')">立即注册</el-link>
-                </p>
+<!--                <p class="login-tips">Tips : 用户名和密码随便填。</p>-->
+<!--                <p class="login-text">-->
+<!--                    没有账号？<el-link type="primary" @click="$router.push('/register')">立即注册</el-link>-->
+<!--                </p>-->
             </el-form>
         </div>
     </div>
@@ -50,9 +50,11 @@ import { usePermissStore } from '@/store/permiss';
 import { useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus';
 import type { FormInstance, FormRules } from 'element-plus';
+import {fetchRoleData, sysLogin} from "@/api";
+import {error} from "echarts/types/src/util/log";
 
 interface LoginInfo {
-    username: string;
+    account: string;
     password: string;
 }
 
@@ -62,19 +64,25 @@ const checked = ref(lgStr ? true : false);
 
 const router = useRouter();
 const param = reactive<LoginInfo>({
-    username: defParam ? defParam.username : '',
+    account: defParam ? defParam.phone : '',
     password: defParam ? defParam.password : '',
 });
 
 const rules: FormRules = {
-    username: [
+    account: [
         {
             required: true,
             message: '请输入用户名',
             trigger: 'blur',
         },
     ],
-    password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+    password: [
+        {
+          required: true,
+          message: '请输入密码',
+          trigger: 'blur'
+        }
+    ],
 };
 const permiss = usePermissStore();
 const login = ref<FormInstance>();
@@ -82,18 +90,30 @@ const submitForm = (formEl: FormInstance | undefined) => {
     if (!formEl) return;
     formEl.validate((valid: boolean) => {
         if (valid) {
-            ElMessage.success('登录成功');
-            localStorage.setItem('vuems_name', param.username);
-            const keys = permiss.defaultList[param.username == 'admin' ? 'admin' : 'user'];
-            permiss.handleSet(keys);
-            router.push('/');
-            if (checked.value) {
-                localStorage.setItem('login-param', JSON.stringify(param));
-            } else {
+          sysLogin(param).then((res) => {
+              ElMessage.success('success');
+              console.log("res",res)
+              localStorage.setItem('vuems_name', res.data.data.username);
+              localStorage.setItem("token",res.data.data.token)
+              const keys = permiss.defaultList[res.data.data.Role.name == 'admin' ? 'admin' : 'user'];
+
+              permiss.handleSet(keys);
+              router.push('/dashboard');
+
+              if (checked.value) {
+                localStorage.setItem('login-param', JSON.stringify(res.data.data));
+              } else {
                 localStorage.removeItem('login-param');
-            }
+              }
+          }).catch((error) => {
+            localStorage.clear()
+            ElMessage.error(error.response.data.message)
+            return false
+          })
+
         } else {
             ElMessage.error('登录失败');
+            localStorage.clear()
             return false;
         }
     });

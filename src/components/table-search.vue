@@ -57,4 +57,8 @@ const resetForm = (formEl: FormInstance | undefined) => {
 	border: 1px solid #ddd;
 	border-radius: 5px
 }
+
+.search-container .el-select{
+  width: 100px;
+}
 </style>

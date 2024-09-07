@@ -8,7 +8,7 @@
         <template #toolbarBtn>
           <el-button type="warning" :icon="CirclePlusFilled" @click="visible = true">新增</el-button>
         </template>
-        <template #thumb="{ rows }">
+        <template #url="{ rows }">
           <el-image class="table-td-thumb" :src="rows.url" :z-index="10" :preview-src-list="[rows.url]"
                     preview-teleported>
           </el-image>
@@ -25,7 +25,7 @@
     <el-dialog :title="isEdit ? '编辑' : '新增'" v-model="visible" width="700px" destroy-on-close
                :close-on-click-modal="false" @close="closeDialog">
       <TableEdit :form-data="rowData" :options="options" :edit="isEdit" :update="updateData">
-        <template #thumb="{ rows }">
+        <template #rul="{ rows }">
           <img class="table-td-thumb" :src="rows.url"></img>
         </template>
       </TableEdit>
@@ -34,7 +34,7 @@
 
     <el-dialog title="查看详情" v-model="visible1" width="700px" destroy-on-close>
       <TableDetail :data="viewData">
-        <template #thumb="{ rows }">
+        <template #url="{ rows }">
           <el-image :src="rows.url"></el-image>
         </template>
       </TableDetail>
@@ -56,13 +56,14 @@ import { FormOption, FormOptionList } from '@/types/form-option';
 
 // 查询相关
 const query = reactive({
-  name: '',
+  type: {label:'系统',value: 1},
 });
 const searchOpt = ref<FormOptionList[]>([
-  { type: 'input', label: '资源ID：', prop: 'sourceId' }
+  { type: 'select', label: '类型', prop: 'type',placeholder : '', opts:[{label:'系统',value: 1},{label:'产品',value:2}] }
 ])
 const handleSearch = () => {
-  changePage(1);
+  console.log("param",query)
+  changePage(query);
 };
 
 // 表格相关
@@ -71,7 +72,6 @@ let columns = ref([
   { type: 'index', label: '序号', width: 55, align: 'center' },
   { prop: 'sourceId', label: '资源ID' },
   { prop: 'url', label: '图片地址' },
-  { prop: 'createTime', label: '创建时间' },
   { prop: 'type', label: '类型' },
   { prop: 'weight', label: '权重' },
   { prop: 'operator', label: '操作', width: 250 },
@@ -83,17 +83,15 @@ const page = reactive({
 })
 const tableData = ref<BannerItem[]>([]);
 
-const getData = async () => {
+const getData = async (param) => {
 
-  const res = await bannerList({})
-  console.log("res",res.data.data)
+  const res = await bannerList(param)
   tableData.value = res.data.data;
 };
-getData();
-
-const changePage = (val: number) => {
-  page.index = val;
-  getData();
+getData({});
+const changePage = (param) => {
+  // page.index = val;
+  getData(param);
 };
 
 // 新增/编辑弹窗相关
@@ -115,9 +113,9 @@ const handleEdit = (row: BannerItem) => {
   isEdit.value = true;
   visible.value = true;
 };
-const updateData = () => {
+const updateData = (param) => {
   closeDialog();
-  getData();
+  getData(param);
 };
 
 const closeDialog = () => {
@@ -145,10 +143,6 @@ const handleView = (row: BannerItem) => {
     {
       prop: 'url',
       label: 'banner地址',
-    },
-    {
-      prop: 'createTime',
-      label: '创建时间',
     },
     {
       prop: 'weight',

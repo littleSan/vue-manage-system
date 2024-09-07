@@ -12,6 +12,22 @@ export const bannerList = (param) => {
         params:param
     });
 };
+
+export const informationList = (param) => {
+    return request({
+        url: '/api/information/page/list',
+        method: 'get',
+        params:param
+    });
+};
+
+export const sysLogin = (param) => {
+    return request({
+        url: '/api/sys/login',
+        method: 'post',
+        data:param
+    });
+};
 export const fetchUserData = () => {
     return request({
         url: './mock/user.json',

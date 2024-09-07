@@ -1,9 +1,9 @@
 <template>
     <div class="container">
-        <div class="plugins-tips">
-            wangEditor：轻量级 web 富文本编辑器，配置方便，使用简单。 访问地址：
-            <a href="https://www.wangeditor.com/doc/" target="_blank">wangEditor</a>
-        </div>
+<!--        <div class="plugins-tips">-->
+<!--            wangEditor：轻量级 web 富文本编辑器，配置方便，使用简单。 访问地址：-->
+<!--            <a href="https://www.wangeditor.com/doc/" target="_blank">wangEditor</a>-->
+<!--        </div>-->
         <div style="border: 1px solid #ccc; margin-bottom: 10px">
             <Toolbar style="border-bottom: 1px solid #ccc" :editor="editorRef" :defaultConfig="toolbarConfig" />
             <Editor

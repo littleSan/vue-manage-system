@@ -3,7 +3,7 @@
 		<el-descriptions-item v-for="item in list" :span="item.span">
 			<template #label> {{ item.label }} </template>
 			<slot :name="item.prop" :rows="row">
-				{{ item.value || row[item.prop] }}
+        {{ item.value || row[item.prop] }}
 			</slot>
 		</el-descriptions-item>
 	</el-descriptions>
@@ -16,6 +16,6 @@ const props = defineProps({
 		required: true,
 	}
 });
-const { row, title, column = 2, list } = props.data;
+const { row, title, column = 1, list } = props.data;
 
 </script>
