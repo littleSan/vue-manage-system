@@ -90,6 +90,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
     if (!formEl) return;
     formEl.validate((valid: boolean) => {
         if (valid) {
+          console.log("开始请求")
           sysLogin(param).then((res) => {
               ElMessage.success('success');
               console.log("res",res)

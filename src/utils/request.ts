@@ -16,6 +16,7 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
     (response: AxiosResponse) => {
+        console.log("请求返回")
         if (response.status === 200) {
             return response;
         } else {

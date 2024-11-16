@@ -86,7 +86,7 @@ let columns = ref([
   { prop: 'weight', label: '权重' },
   { prop: 'type', label: '类型' },
   { prop: 'description', label: '简介' },
-  { prop: 'content', label: '文章内容' },
+  // { prop: 'content', label: '文章内容' },
 
   { prop: 'operator', label: '操作', width: 250 },
 ])
