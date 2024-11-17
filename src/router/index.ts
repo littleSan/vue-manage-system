@@ -61,13 +61,13 @@ const routes: RouteRecordRaw[] = [
                 component: () => import(/* webpackChunkName: "table" */ '../views/table/basetable.vue'),
             },
             {
-                path: '/table-editor',
-                name: 'table-editor',
+                path: '/product',
+                name: 'product',
                 meta: {
-                    title: '可编辑表格',
+                    title: '产品管理',
                     permiss: '32',
                 },
-                component: () => import(/* webpackChunkName: "table-editor" */ '../views/table/table-editor.vue'),
+                component: () => import(/* webpackChunkName: "product" */ '../views/product/product.vue'),
             },
             {
                 path: '/banner',

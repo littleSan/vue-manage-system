@@ -102,7 +102,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
               router.push('/dashboard');
 
               if (checked.value) {
-                localStorage.setItem('login-param', JSON.stringify(res.data.data));
+                localStorage.setItem('login-param', JSON.stringify(param.password));
               } else {
                 localStorage.removeItem('login-param');
               }

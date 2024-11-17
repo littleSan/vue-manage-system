@@ -21,6 +21,13 @@ export const informationList = (param) => {
     });
 };
 
+export const productList = (param) => {
+    return request({
+        url: '/api/product/page/list',
+        method: 'get',
+        params:param
+    });
+};
 export const sysLogin = (param) => {
     return request({
         url: '/api/sys/login',

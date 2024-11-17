@@ -54,7 +54,7 @@ export const menuData: Menus[] = [
             {
                 id: '23',
                 pid: '2',
-                index: '/table-editor',
+                index: '/product',
                 title: '产品管理',
             },
 
