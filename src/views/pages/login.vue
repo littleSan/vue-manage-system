@@ -64,7 +64,7 @@ const checked = ref(lgStr ? true : false);
 
 const router = useRouter();
 const param = reactive<LoginInfo>({
-    account: defParam ? defParam.phone : '',
+    account: defParam ? defParam.account : '',
     password: defParam ? defParam.password : '',
 });
 
@@ -90,7 +90,6 @@ const submitForm = (formEl: FormInstance | undefined) => {
     if (!formEl) return;
     formEl.validate((valid: boolean) => {
         if (valid) {
-          console.log("开始请求")
           sysLogin(param).then((res) => {
               ElMessage.success('success');
               console.log("res",res)
@@ -102,7 +101,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
               router.push('/dashboard');
 
               if (checked.value) {
-                localStorage.setItem('login-param', JSON.stringify(param.password));
+                localStorage.setItem('login-param', JSON.stringify(param));
               } else {
                 localStorage.removeItem('login-param');
               }

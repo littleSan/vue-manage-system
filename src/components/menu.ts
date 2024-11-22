@@ -7,32 +7,32 @@ export const menuData: Menus[] = [
         index: '/dashboard',
         icon: 'Odometer',
     },
-    {
-        id: '1',
-        title: '系统管理',
-        index: '1',
-        icon: 'HomeFilled',
-        children: [
-            {
-                id: '11',
-                pid: '1',
-                index: '/system-user',
-                title: '用户管理',
-            },
-            {
-                id: '12',
-                pid: '1',
-                index: '/system-role',
-                title: '角色管理',
-            },
-            {
-                id: '13',
-                pid: '1',
-                index: '/system-menu',
-                title: '菜单管理',
-            },
-        ],
-    },
+    // {
+    //     id: '1',
+    //     title: '系统管理',
+    //     index: '1',
+    //     icon: 'HomeFilled',
+    //     children: [
+    //         {
+    //             id: '11',
+    //             pid: '1',
+    //             index: '/system-user',
+    //             title: '用户管理',
+    //         },
+    //         {
+    //             id: '12',
+    //             pid: '1',
+    //             index: '/system-role',
+    //             title: '角色管理',
+    //         },
+    //         {
+    //             id: '13',
+    //             pid: '1',
+    //             index: '/system-menu',
+    //             title: '菜单管理',
+    //         },
+    //     ],
+    // },
     {
         id : '2',
         title:'信息管理',
@@ -64,17 +64,17 @@ export const menuData: Menus[] = [
                 index: '/information',
                 title: '文章管理',
             },
-            {
-                id: '25',
-                pid: '2',
-                index: '/upload',
-                title: '友商管理',
-            },
+            // {
+            //     id: '25',
+            //     pid: '2',
+            //     index: '/upload',
+            //     title: '友商管理',
+            // },
             {
                 id: '26',
                 pid: '2',
                 index: '/editor',
-                title: '富文本',
+                title: '文章頁面生成',
             },
         ],
     },

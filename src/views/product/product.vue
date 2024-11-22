@@ -173,11 +173,11 @@ const handleView = (row: TableItem) => {
 
 // 删除相关
 const handleDelete = async (row: TableItem) => {
-  console.log("resrrrrr",row)
  const res = await productDelete({id:row.id});
   if(res.data.code === 200){
+      getData({});
     ElMessage.success('删除成功');
-    getData({});
+
   }
 }
 </script>

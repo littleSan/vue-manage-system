@@ -61,8 +61,8 @@ export const productUpdate = (param) => {
 export const productDelete = (param) => {
     return request({
         url: '/api/product/delete',
-        method: 'post',
-        data:param
+        method: 'delete',
+        params:param
     });
 };
 export const sysLogin = (param) => {
