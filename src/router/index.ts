@@ -78,6 +78,15 @@ const routes: RouteRecordRaw[] = [
                 },
                 component: () => import(/* webpackChunkName: "editor" */ '../views/banner/banner.vue'),
             },
+            {
+                path: '/category',
+                name: 'category',
+                meta: {
+                    title: '产品分类',
+                    permiss: '32',
+                },
+                component: () => import(/* webpackChunkName: "category" */ '../views/productCategory/productCategory.vue'),
+            },
             // {
             //     path: '/schart',
             //     name: 'schart',

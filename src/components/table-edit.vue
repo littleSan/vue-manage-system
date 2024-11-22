@@ -17,13 +17,28 @@
 					<el-switch v-else-if="item.type === 'switch'" v-model="form[item.prop]"
 						:active-value="item.activeValue" :inactive-value="item.inactiveValue"
 						:active-text="item.activeText" :inactive-text="item.inactiveText"></el-switch>
-					<el-upload v-else-if="item.type === 'upload'" class="avatar-uploader" action="#"
+					<el-upload v-else-if="item.type === 'upload'" class="avatar-uploader"
+                      action="/api/file/uploadLocal"
 						:show-file-list="false" :on-success="handleAvatarSuccess">
 						<img v-if="form[item.prop]" :src="form[item.prop]" class="avatar" />
 						<el-icon v-else class="avatar-uploader-icon">
 							<Plus />
 						</el-icon>
 					</el-upload>
+<!--            <div v-else-if="item.type === 'editor'" style="border: 1px solid #ccc; margin-bottom: 10px">-->
+<!--                <Toolbar-->
+<!--                     style="border-bottom: 1px solid #ccc"-->
+<!--                     :editor="editorRef"-->
+<!--                     :defaultConfig="toolbarConfig" />-->
+<!--               <Editor-->
+<!--                style="height: 500px; overflow-y: hidden"-->
+<!--                v-model="valueHtml"-->
+<!--                :defaultConfig="editorConfig"-->
+<!--                @onCreated="handleCreated"-->
+<!--               />-->
+<!--            </div>-->
+
+
 					<slot :name="item.prop" v-else>
 
 					</slot>
@@ -41,6 +56,10 @@
 import { FormOption } from '@/types/form-option';
 import { FormInstance, FormRules, UploadProps } from 'element-plus';
 import { PropType, ref } from 'vue';
+
+// import '@wangeditor/editor/dist/css/style.css'; // 引入 css
+// import { onBeforeUnmount, reactive, shallowRef, onMounted } from 'vue';
+// import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
 
 const { options, formData, edit, update } = defineProps({
 	options: {
@@ -82,8 +101,42 @@ const saveEdit = (formEl: FormInstance | undefined) => {
 };
 
 const handleAvatarSuccess: UploadProps['onSuccess'] = (response, uploadFile) => {
-	form.value.thumb = URL.createObjectURL(uploadFile.raw!);
+	// form.value.image = URL.createObjectURL(uploadFile.raw!);
+	// form.value.url = URL.createObjectURL(uploadFile.raw!);
+  console.log("rrrrr",response)
+  form.value.image ="https://manage.dimei-med.com"+ response.data;
+  console.log("form.value.image",form.value.image)
+  form.value.url = "https://manage.dimei-med.com"+ response.data;
 };
+
+
+//编辑器
+//编辑器
+// const editorRef = shallowRef();
+// // 内容 HTML
+// const valueHtml = ref('<p>hello</p>');
+//
+// // 模拟 ajax 异步获取内容
+// onMounted(() => {
+//     setTimeout(() => {
+//         valueHtml.value = '<p>模拟 Ajax 异步设置内容</p>';
+//     }, 1500);
+// });
+//
+// const toolbarConfig = {};
+// const editorConfig = { placeholder: '请输入内容...' };
+//
+// // 组件销毁时，也及时销毁编辑器
+// onBeforeUnmount(() => {
+//     const editor = editorRef.value;
+//     if (editor == null) return;
+//     editor.destroy();
+// });
+//
+// const handleCreated = (editor: any) => {
+//     editorRef.value = editor; // 记录 editor 实例，重要！
+// };
+
 
 </script>
 

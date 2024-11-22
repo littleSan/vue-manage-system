@@ -6,5 +6,4 @@ export interface ProductItem {
     category: number;
     attribute: string;
     status: number;
-    createTime: string;
 }

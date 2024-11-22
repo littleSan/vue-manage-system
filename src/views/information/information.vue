@@ -62,7 +62,6 @@ import TableSearch from '@/components/table-search.vue';
 import { TableItem } from '@/types/table';
 import { FormOption, FormOptionList } from '@/types/form-option';
 import {InformationItem} from "@/types/information";
-
 // 查询相关
 const query = reactive({
   title: '',
@@ -120,7 +119,7 @@ let options = ref<FormOption>({
     { type: 'input', label: '简介', prop: 'description', required: true },
     { type: 'number', label: '权重', prop: 'weight', required: false },
     { type: 'select',label: '类型', prop: 'type',opts:[{label:'护理百科',value: 1},{label:'公司动态',value:2},{label:'行业动态',value:3}], required: true },
-    { type: 'input', label: '文章内容', prop: 'content', required: true },
+    { type: 'input', label: '文章内容', prop: 'content', required: false },
 
   ]
 })
@@ -196,7 +195,6 @@ const handleView = (row: TableItem) => {
   ]
   visible1.value = true;
 };
-
 // 删除相关
 const handleDelete = (row: TableItem) => {
   ElMessage.success('删除成功');

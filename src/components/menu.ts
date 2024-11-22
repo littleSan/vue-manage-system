@@ -48,7 +48,7 @@ export const menuData: Menus[] = [
             {
                 id: '22',
                 pid: '2',
-                index: '/form',
+                index: '/category',
                 title: '产品分类管理',
             },
             {

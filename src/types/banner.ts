@@ -3,6 +3,6 @@ export interface BannerItem {
     informationId: number;
     url: string;
     createTime: string;
-    weight: string;
+    weight: number;
     type:number;
 }

@@ -4,7 +4,7 @@
     <div class="container">
       <TableCustom :columns="columns" :tableData="tableData" :total="page.total" :viewFunc="handleView"
                    :delFunc="handleDelete" :editFunc="handleEdit" :refresh="getData" :currentPage="page.index"
-                   :changePage="changePage">
+                   :changePage="changePage" :hasPagination = false>
         <template #toolbarBtn>
           <el-button type="warning" :icon="CirclePlusFilled" @click="visible = true">新增</el-button>
         </template>
@@ -13,9 +13,9 @@
                     preview-teleported>
           </el-image>
         </template>
-        <template #state="{ rows }">
-          <el-tag :type="rows.state ? 'success' : 'danger'">
-            {{ rows.state ? '正常' : '异常' }}
+        <template #type="{ rows }">
+          <el-tag :type="rows.type === 1 ? 'success' : 'primary'">
+            {{ rows.type === 1 ? '系统banner' : '产品banner' }}
           </el-tag>
         </template>
       </TableCustom>
@@ -46,7 +46,7 @@
 import { ref, reactive } from 'vue';
 import { ElMessage, } from 'element-plus';
 import { CirclePlusFilled } from '@element-plus/icons-vue';
-import {bannerList, fetchData} from '@/api/index';
+import {bannerList, fetchData,deleteBanner,bannerAdd} from '@/api/index';
 import TableCustom from '@/components/table-custom.vue';
 import TableDetail from '@/components/table-detail.vue';
 import TableSearch from '@/components/table-search.vue';
@@ -69,8 +69,9 @@ const handleSearch = () => {
 // 表格相关
 let columns = ref([
   { type: 'selection' },
-  { type: 'index', label: '序号', width: 55, align: 'center' },
-  { prop: 'sourceId', label: '资源ID' },
+  // { type: 'index', label: '序号', width: 55, align: 'center' },
+     { prop: 'id', label: 'bannerId' },
+  // { prop: 'sourceId', label: '资源ID' },
   { prop: 'url', label: '图片地址' },
   { prop: 'type', label: '类型' },
   { prop: 'weight', label: '权重' },
@@ -100,7 +101,7 @@ let options = ref<FormOption>({
   span: 24,
   list: [
     { type: 'input', label: '资源', prop: 'informationId', required: true },
-    // { type: 'switch', activeText: '正常', inactiveText: '异常', label: '账户状态', prop: 'state', required: true },
+    { type: 'number', label: '权重', prop: 'weight', required: true },
     { type: 'upload', label: 'banner', prop: 'url', required: true },
     { type: 'select', label: '类型', prop: 'type', required: true ,opts:[{label:'系统',value: 1},{label:'产品',value:2}]},
   ]
@@ -109,13 +110,19 @@ const visible = ref(false);
 const isEdit = ref(false);
 const rowData = ref({});
 const handleEdit = (row: BannerItem) => {
-  rowData.value = { ...row };
-  isEdit.value = true;
-  visible.value = true;
+  ElMessage.info("banner不允许编辑")
+  return
+  // rowData.value = { ...row };
+  // isEdit.value = true;
+  // visible.value = true;
 };
-const updateData = (param) => {
+const updateData = async (param) => {
   closeDialog();
-  getData(param);
+  if(param["id"] === '' || param["id"] === undefined){
+    console.log("新增",param);
+    await bannerAdd(param);
+  }
+  getData({});
 };
 
 const closeDialog = () => {
@@ -136,10 +143,10 @@ const handleView = (row: BannerItem) => {
       prop: 'id',
       label: 'bannerId',
     },
-    {
-      prop: 'informationId',
-      label: '资源ID',
-    },
+    // {
+    //   prop: 'informationId',
+    //   label: '资源ID',
+    // },
     {
       prop: 'url',
       label: 'banner地址',
@@ -157,8 +164,12 @@ const handleView = (row: BannerItem) => {
 };
 
 // 删除相关
-const handleDelete = (row: BannerItem) => {
-  ElMessage.success('删除成功');
+const handleDelete = async (row: BannerItem) => {
+  const res = await deleteBanner({id:row.id});
+  if(res.data.code === 200){
+    ElMessage.success('删除成功');
+    getData({});
+  }
 }
 </script>
 
