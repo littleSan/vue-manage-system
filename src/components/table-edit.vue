@@ -18,7 +18,7 @@
 						:active-value="item.activeValue" :inactive-value="item.inactiveValue"
 						:active-text="item.activeText" :inactive-text="item.inactiveText"></el-switch>
 					<el-upload v-else-if="item.type === 'upload'" class="avatar-uploader"
-                      action="/api/file/uploadLocal"
+                      action="/back/api/file/uploadLocal"
 						:show-file-list="false" :on-success="handleAvatarSuccess">
 						<img v-if="form[item.prop]" :src="form[item.prop]" class="avatar" />
 						<el-icon v-else class="avatar-uploader-icon">

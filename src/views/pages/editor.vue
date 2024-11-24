@@ -44,7 +44,7 @@ const editorConfig = {
         MENU_CONF: {
           //上传参考https://www.wangeditor.com/v5/menu-config.html#%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE
           uploadImage: {
-            server: `/api/file/w/uploadLocal`,
+            server: `/back/api/file/w/uploadLocal`,
             // 超时时间，默认为 10 秒
             timeout: 30 * 1000, // 5s
             fieldName: "file",
@@ -93,7 +93,7 @@ const editorConfig = {
             }
           },
           uploadVideo: {
-            server: "/api/file/w/uploadLocal",
+            server: "/back/api/file/w/uploadLocal",
             fieldName: "file",
             // 单个文件的最大体积限制，默认为 10M
             maxFileSize: 5 * 1024 * 1024, // 5M

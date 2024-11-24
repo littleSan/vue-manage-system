@@ -6,6 +6,10 @@ const service: AxiosInstance = axios.create({
 
 service.interceptors.request.use(
     (config: InternalAxiosRequestConfig) => {
+         const token =  localStorage.getItem("token")
+
+    //   // 请求头token信息，请根据实际情况进行修改
+      config.headers['Authorization'] = token
         return config;
     },
     (error: AxiosError) => {

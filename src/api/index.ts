@@ -1,20 +1,22 @@
 import request from '../utils/request';
+
+// const  BaseURL= 'http://manage.dimei-med.com/back'
 export const fetchData = () => {
     return request({
-        url: './mock/table.json',
+        // url: './mock/table.json',
         method: 'get'
     });
 };
 export const bannerList = (param) => {
     return request({
-        url: '/api/banner/list',
+        url: '/back/api/banner/list',
         method: 'get',
         params:param
     });
 };
 export const bannerAdd = (param) => {
     return request({
-        url: '/api/banner/save',
+        url: '/back/api/banner/save',
         method: 'put',
         data:param
     });
@@ -22,7 +24,7 @@ export const bannerAdd = (param) => {
 
 export const deleteBanner = (param) => {
     return request({
-        url: '/api/banner/delete',
+        url: '/back/api/banner/delete',
         method: 'delete',
         params:param
     });
@@ -30,7 +32,7 @@ export const deleteBanner = (param) => {
 
 export const informationList = (param) => {
     return request({
-        url: '/api/information/page/list',
+        url: '/back/api/information/page/list',
         method: 'get',
         params:param
     });
@@ -38,21 +40,21 @@ export const informationList = (param) => {
 
 export const productList = (param) => {
     return request({
-        url: '/api/product/page/list',
+        url: '/back/api/product/page/list',
         method: 'get',
         params:param
     });
 };
 export const productAdd = (param) => {
     return request({
-        url: '/api/product/save',
+        url: '/back/api/product/save',
         method: 'put',
         data:param
     });
 };
 export const productUpdate = (param) => {
     return request({
-        url: '/api/product/update',
+        url: '/back/api/product/update',
         method: 'post',
         data:param
     });
@@ -60,14 +62,14 @@ export const productUpdate = (param) => {
 
 export const productDelete = (param) => {
     return request({
-        url: '/api/product/delete',
+        url: '/back/api/product/delete',
         method: 'delete',
         params:param
     });
 };
 export const sysLogin = (param) => {
     return request({
-        url: '/api/sys/login',
+        url: '/back/api/sys/login',
         method: 'post',
         data:param
     });
@@ -75,7 +77,7 @@ export const sysLogin = (param) => {
 
 export const productCategoryList = (param) => {
     return request({
-        url: '/api/category/list',
+        url: '/back/api/category/list',
         method: 'get',
         params:param
     });
@@ -83,14 +85,14 @@ export const productCategoryList = (param) => {
 
 export const productCategoryUpdate = (param) => {
     return request({
-        url: '/api/category/update',
+        url: '/back/api/category/update',
         method: 'post',
         data:param
     });
 };
 export const productCategoryAdd = (param) => {
     return request({
-        url: '/api/category/save',
+        url: '/back/api/category/save',
         method: 'put',
         data:param
     });

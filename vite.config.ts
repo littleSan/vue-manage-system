@@ -32,11 +32,11 @@ export default defineConfig({
 		cors: true,
 		open: true,
 		proxy: {
-			'/api': {
-				target: 'https://manage.dimei-med.com/manage',   //代理接口
+			'/back/api': {
+				target: 'http://manage.dimei-med.com/back',   //代理接口
 				// target: 'http://127.0.0.1:18080',   //代理接口
 				changeOrigin: true,
-				rewrite: (path) => path.replace(/^\/api/, '/api/')
+				rewrite: (path) => path.replace(/^\/back\/api/, '/api/')
 			}
 		}
 	},
