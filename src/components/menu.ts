@@ -64,12 +64,12 @@ export const menuData: Menus[] = [
                 index: '/information',
                 title: '文章管理',
             },
-            // {
-            //     id: '25',
-            //     pid: '2',
-            //     index: '/upload',
-            //     title: '友商管理',
-            // },
+            {
+                id: '25',
+                pid: '2',
+                index: '/company',
+                title: '公司管理',
+            },
             {
                 id: '26',
                 pid: '2',

@@ -97,6 +97,22 @@ export const productCategoryAdd = (param) => {
         data:param
     });
 };
+
+export const companyInfo = (param) => {
+    return request({
+        url: '/back/api/company/getInfo',
+        method: 'get',
+        params:param
+    });
+};
+
+export const updateCompanyInfo = (param) => {
+    return request({
+        url: '/back/api/company/update',
+        method: 'post',
+        data:param
+    });
+};
 export const fetchUserData = () => {
     return request({
         url: './mock/user.json',

@@ -150,6 +150,15 @@ const routes: RouteRecordRaw[] = [
                 },
                 component: () => import(/* webpackChunkName: "markdown" */ '../views/pages/markdown.vue'),
             },
+             {
+                path: '/company',
+                name: 'company',
+                meta: {
+                    title: '公司信息管理',
+                    permiss: '32',
+                },
+                component: () => import(/* webpackChunkName: "company" */ '../views/company/company.vue'),
+            },
             // {
             //     path: '/export',
             //     name: 'export',
