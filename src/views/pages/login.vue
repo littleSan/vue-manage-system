@@ -106,7 +106,6 @@ const submitForm = (formEl: FormInstance | undefined) => {
            //      ElMessage.success('success');
           sysLogin(param).then((res) => {
               ElMessage.success('success');
-              console.log("res",res)
               localStorage.setItem('vuems_name', res.data.data.username);
               localStorage.setItem("token",res.data.data.token)
               const keys = permiss.defaultList[res.data.data.Role.name == 'admin' ? 'admin' : 'user'];

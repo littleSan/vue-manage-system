@@ -46,7 +46,7 @@
 import { ref, reactive } from 'vue';
 import { ElMessage, } from 'element-plus';
 import { CirclePlusFilled } from '@element-plus/icons-vue';
-import {bannerList, fetchData,deleteBanner,bannerAdd} from '@/api/index';
+import {bannerList, fetchData,deleteBanner,bannerAdd,bannerUpdate} from '@/api/index';
 import TableCustom from '@/components/table-custom.vue';
 import TableDetail from '@/components/table-detail.vue';
 import TableSearch from '@/components/table-search.vue';
@@ -110,17 +110,24 @@ const visible = ref(false);
 const isEdit = ref(false);
 const rowData = ref({});
 const handleEdit = (row: BannerItem) => {
-  ElMessage.info("banner不允许编辑")
-  return
-  // rowData.value = { ...row };
-  // isEdit.value = true;
-  // visible.value = true;
+  // ElMessage.info("banner不允许编辑")
+  // return
+  rowData.value = { ...row };
+  isEdit.value = true;
+  visible.value = true;
 };
 const updateData = async (param) => {
   closeDialog();
   if(param["id"] === '' || param["id"] === undefined){
     console.log("新增",param);
     await bannerAdd(param);
+  }else{
+    console.log("更新")
+    const res = await bannerUpdate(param);
+    console.log('res',res)
+    if (res.data.code == 200200){
+      ElMessage.success('更新banner成功');
+    }
   }
   getData({});
 };

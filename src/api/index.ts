@@ -22,6 +22,14 @@ export const bannerAdd = (param) => {
     });
 };
 
+export const bannerUpdate = (param) => {
+    return request({
+        url: '/back/api/banner/update',
+        method: 'post',
+        data:param
+    });
+};
+
 export const deleteBanner = (param) => {
     return request({
         url: '/back/api/banner/delete',

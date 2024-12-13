@@ -10,6 +10,7 @@ service.interceptors.request.use(
 
     //   // 请求头token信息，请根据实际情况进行修改
       config.headers['Authorization'] = token
+      config.headers['token'] = token
         return config;
     },
     (error: AxiosError) => {
