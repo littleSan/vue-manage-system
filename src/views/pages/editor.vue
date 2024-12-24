@@ -1,5 +1,10 @@
 <template>
+
     <div class="container">
+      <div>
+        <el-input type = "textarea" v-model="input1" placeholder="将文章数据进行转换"></el-input>
+        <el-button type="primary" @click="transData">转换</el-button>
+    </div>
 <!--        <div class="plugins-tips">-->
 <!--            wangEditor：轻量级 web 富文本编辑器，配置方便，使用简单。 访问地址：-->
 <!--            <a href="https://www.wangeditor.com/doc/" target="_blank">wangEditor</a>-->
@@ -26,7 +31,8 @@ const editorRef = shallowRef();
 
 // 内容 HTML
 const valueHtml = ref('<p>hello</p>');
-
+//
+const input1 = ref('')
 // 模拟 ajax 异步获取内容
 onMounted(() => {
     setTimeout(() => {
@@ -34,6 +40,9 @@ onMounted(() => {
     }, 1500);
 });
 
+const transData=() => {
+     valueHtml.value = input1.value;
+};
 const toolbarConfig = {
    // 编辑器配置
 
@@ -146,6 +155,7 @@ const handleCreated = (editor: any) => {
 };
 const syncHTML = () => {
     alert(valueHtml.value);
+    input1.value = valueHtml.value
 };
 </script>
 

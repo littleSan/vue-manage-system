@@ -159,6 +159,15 @@ const routes: RouteRecordRaw[] = [
                 },
                 component: () => import(/* webpackChunkName: "company" */ '../views/company/company.vue'),
             },
+           {
+                path: '/video',
+                name: 'video',
+                meta: {
+                    title: '视频中心',
+                    permiss: '32',
+                },
+                component: () => import(/* webpackChunkName: "videos" */ '../views/videos/videos.vue'),
+            },
             // {
             //     path: '/export',
             //     name: 'export',

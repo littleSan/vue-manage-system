@@ -20,11 +20,36 @@
 					<el-upload v-else-if="item.type === 'upload'" class="avatar-uploader"
                       action="/back/api/file/uploadLocal"
 						:show-file-list="false" :on-success="handleAvatarSuccess">
-						<img v-if="form[item.prop]" :src="form[item.prop]" class="avatar" />
+<!--						<img v-if="form[item.prop]" :src="form[item.prop]" class="avatar" />-->
+            <img v-if="isImage(form[item.prop])" :src="form[item.prop]" class="avatar" />
+            <video v-else-if="isVideo(form[item.prop])" width="320" height="240" controls>
+                <source :src="form[item.prop]" type="video/mp4" />
+            </video>
 						<el-icon v-else class="avatar-uploader-icon">
 							<Plus />
 						</el-icon>
 					</el-upload>
+
+          <el-upload v-else-if="item.type === 'videosUpload'" class="avatar-uploader"
+                      action="/back/api/file/uploadLocal"
+                      :on-progress="handleProgress"
+                     :on-change="handleProgress"
+						:show-file-list="false" :on-success="handleAvatarSuccess1">
+<!--						<img v-if="form[item.prop]" :src="form[item.prop]" class="avatar" />-->
+            <img v-if="isImage(form[item.prop])" :src="form[item.prop]" class="avatar" />
+            <video v-else-if="isVideo(form[item.prop])" width="320" height="240" controls>
+                <source :src="form[item.prop]" type="video/mp4" />
+            </video>
+
+						<el-icon v-else class="avatar-uploader-icon">
+							<Plus />
+						</el-icon>
+             <el-progress v-if="progressVisible" :percentage="progressPercent" style="margin-top: 10px;"></el-progress>
+					</el-upload>
+
+
+
+
 <!--            <div v-else-if="item.type === 'editor'" style="border: 1px solid #ccc; margin-bottom: 10px">-->
 <!--                <Toolbar-->
 <!--                     style="border-bottom: 1px solid #ccc"-->
@@ -90,7 +115,6 @@ const rules: FormRules = options.list.map(item => {
 	return {};
 }).reduce((acc, cur) => ({ ...acc, ...cur }), {});
 
-
 const formRef = ref<FormInstance>();
 const saveEdit = (formEl: FormInstance | undefined) => {
 	if (!formEl) return;
@@ -100,6 +124,13 @@ const saveEdit = (formEl: FormInstance | undefined) => {
 	});
 };
 
+const isImage = ( url )=> {
+        return url && (url.endsWith('.jpg') || url.endsWith('.jpeg') || url.endsWith('.png') || url.endsWith('.gif'));
+    };
+const isVideo= (url) =>{
+        return url && (url.endsWith('.mp4') || url.endsWith('.avi') || url.endsWith('.mov'));
+    };
+
 const handleAvatarSuccess: UploadProps['onSuccess'] = (response, uploadFile) => {
 	// form.value.image = URL.createObjectURL(uploadFile.raw!);
 	// form.value.url = URL.createObjectURL(uploadFile.raw!);
@@ -107,6 +138,28 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (response, uploadFile) => 
   form.value.image ="https://manage.dimei-med.com"+ response.data;
   console.log("form.value.image",form.value.image)
   form.value.url = "https://manage.dimei-med.com"+ response.data;
+};
+
+const progressVisible = ref(false);
+const progressPercent = ref(0);
+const handleProgress: UploadProps['onProgress'] = (event) => {
+  progressVisible.value = true;
+  progressPercent.value = Math.floor((event.loaded / event.total) * 100);
+  setTimeout(() => {
+    progressVisible.value = false;
+    progressPercent.value = 0;
+  }, 1000);
+};
+const handleAvatarSuccess1: UploadProps['onSuccess'] = async (response, uploadFile) => {
+
+  console.log("ai",response)
+  if(isVideo(response.data)){
+       form.value.url = "https://manage.dimei-med.com"+ response.data;
+
+       console.log("form.value.url",form.value.url)
+  }else if (isImage(response.data)){
+     form.value.coverUrl ="https://manage.dimei-med.com"+ response.data;
+  }
 };
 
 

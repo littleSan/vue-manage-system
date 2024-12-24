@@ -55,7 +55,7 @@
 import { ref, reactive } from 'vue';
 import { ElMessage, } from 'element-plus';
 import { CirclePlusFilled } from '@element-plus/icons-vue';
-import {fetchData, informationList} from '@/api/index';
+import {fetchData, informationList,informationAdd,informationDelete,informationUpdate} from '@/api/index';
 import TableCustom from '@/components/table-custom.vue';
 import TableDetail from '@/components/table-detail.vue';
 import TableSearch from '@/components/table-search.vue';
@@ -99,13 +99,15 @@ const tableData = ref<InformationItem[]>([]);
 const getData = async (param) => {
   const res = await informationList(param)
   tableData.value = res.data.data.data;
+  page.total = res.data.data.total;
+  page.index = res.data.data.page;
 
 };
 getData({});
 
 const changePage = (val: number) => {
-
-  getData(query);
+ let param = {page:val,limit:page.size,category:query.title}
+  getData(param);
 };
 
 // 新增/编辑弹窗相关
@@ -131,8 +133,21 @@ const handleEdit = (row: TableItem) => {
   isEdit.value = true;
   visible.value = true;
 };
-const updateData = (param) => {
-  closeDialog();
+const updateData =  async (param) => {
+
+   closeDialog();
+  if(param["id"] === '' || param["id"] === undefined){
+    console.log("新增",param);
+    await informationAdd(param);
+     ElMessage.success('新增文章成功');
+  }else{
+    console.log("更新")
+    const res = await informationUpdate(param);
+    console.log('res',res)
+    if (res.data.code == 200200){
+      ElMessage.success('更新文章成功');
+    }
+  }
   getData(param);
 };
 
@@ -190,14 +205,17 @@ const handleView = (row: TableItem) => {
       prop: 'content',
       label: '文章内容',
     },
-
-
   ]
   visible1.value = true;
 };
 // 删除相关
-const handleDelete = (row: TableItem) => {
-  ElMessage.success('删除成功');
+const handleDelete = async (row: TableItem) => {
+   const res = await informationDelete({id:row.id});
+  console.log('res',res)
+  if(res.data.code === 200200){
+    ElMessage.success('删除成功');
+  }
+  getData({})
 }
 </script>
 

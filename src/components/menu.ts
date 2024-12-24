@@ -76,6 +76,12 @@ export const menuData: Menus[] = [
                 index: '/editor',
                 title: '文章頁面生成',
             },
+              {
+                id: '27',
+                pid: '2',
+                index: '/video',
+                title: '视频中心',
+            },
         ],
     },
     // {

@@ -46,6 +46,31 @@ export const informationList = (param) => {
     });
 };
 
+export const informationAdd = (param) => {
+    return request({
+        url: '/back/api/information/save',
+        method: 'put',
+        data:param
+    });
+};
+
+export const informationUpdate = (param) => {
+    return request({
+        url: '/back/api/information/update',
+        method: 'post',
+        data:param
+    });
+};
+
+export const informationDelete = (param) => {
+    return request({
+        url: '/back/api/information/delete',
+        method: 'delete',
+        params:param
+    });
+};
+
+
 export const productList = (param) => {
     return request({
         url: '/back/api/product/page/list',
@@ -121,6 +146,43 @@ export const updateCompanyInfo = (param) => {
         data:param
     });
 };
+
+export const filePageList = (param) => {
+    return request({
+        url: '/back/api/file/listPage',
+        method: 'get',
+        params:param
+    });
+};
+export const fileAdd = (param) => {
+    return request({
+        url: '/back/api/file/save',
+        method: 'post',
+        data:param
+    });
+};
+
+export const fileUpdate = (param) => {
+    return request({
+        url: '/back/api/file/update',
+        method: 'PUT',
+        data:param
+    });
+};
+
+export const deleteFile = (param) => {
+    return request({
+        url: '/back/api/file/delete',
+        method: 'delete',
+        params:param
+    });
+};
+
+
+
+
+
+
 export const fetchUserData = () => {
     return request({
         url: './mock/user.json',
