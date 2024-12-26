@@ -20,11 +20,11 @@
 					<el-upload v-else-if="item.type === 'upload'" class="avatar-uploader"
                       action="/back/api/file/uploadLocal"
 						:show-file-list="false" :on-success="handleAvatarSuccess">
-<!--						<img v-if="form[item.prop]" :src="form[item.prop]" class="avatar" />-->
-            <img v-if="isImage(form[item.prop])" :src="form[item.prop]" class="avatar" />
-            <video v-else-if="isVideo(form[item.prop])" width="320" height="240" controls>
-                <source :src="form[item.prop]" type="video/mp4" />
-            </video>
+						<img v-if="form[item.prop]" :src="form[item.prop]" class="avatar" />
+<!--            <img v-if="isImage(form[item.prop])" :src="form[item.prop]" class="avatar" />-->
+<!--            <video v-else-if="isVideo(form[item.prop])" width="320" height="240" controls>-->
+<!--                <source :src="form[item.prop]" type="video/mp4" />-->
+<!--            </video>-->
 						<el-icon v-else class="avatar-uploader-icon">
 							<Plus />
 						</el-icon>
@@ -155,7 +155,6 @@ const handleAvatarSuccess1: UploadProps['onSuccess'] = async (response, uploadFi
   console.log("ai",response)
   if(isVideo(response.data)){
        form.value.url = "https://manage.dimei-med.com"+ response.data;
-
        console.log("form.value.url",form.value.url)
   }else if (isImage(response.data)){
      form.value.coverUrl ="https://manage.dimei-med.com"+ response.data;

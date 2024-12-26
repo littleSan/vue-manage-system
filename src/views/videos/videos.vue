@@ -13,11 +13,11 @@
 <!--            <source :src="rows.url" type="video/mp4">-->
 <!--          </video>-->
 <!--        </template>-->
-<!--        <template #coverUrl="{ rows }">-->
-<!--          <el-image class="table-td-thumb" :src="rows.coverUrl" :z-index="10" :preview-src-list="[rows.coverUrl]"-->
-<!--                    preview-teleported>-->
-<!--          </el-image>-->
-<!--        </template>-->
+        <template #coverUrl="{ rows }">
+          <el-image class="table-td-thumb" :src="rows.coverUrl" :z-index="10" :preview-src-list="[rows.coverUrl]"
+                    preview-teleported>
+          </el-image>
+        </template>
       </TableCustom>
 
     </div>
@@ -31,10 +31,10 @@
           </video>
 <!--          <video class="table-td-thumb" :src="rows.url" controls="controls"></video>-->
         </template>
-<!--         <template #coverUrl="{ rows }">-->
-<!--          <el-image class="table-td-thumb" :src="rows.coverUrl" :z-index="10" :preview-src-list="[rows.coverUrl]">-->
-<!--          </el-image>-->
-<!--        </template>-->
+         <template #coverUrl="{ rows }">
+          <el-image class="table-td-thumb" :src="rows.coverUrl" :z-index="10" :preview-src-list="[rows.coverUrl]">
+          </el-image>
+        </template>
       </TableEdit>
 
     </el-dialog>
@@ -94,7 +94,7 @@ let columns = ref([
   { prop: 'description', label: '描述' },
   { prop: 'url', label: '视频' },
   { prop: 'weight', label: '权重' },
-  // { prop: 'coverUrl', label: '封面' },
+  { prop: 'coverUrl', label: '封面' },
   { prop: 'operator', label: '操作', width: 250 },
 ])
 const page = reactive({
@@ -128,7 +128,7 @@ let options = ref<FormOption>({
     { type: 'number', label: '权重', prop: 'weight', required: true },
     { type: 'input', label: '描述', prop: 'description', required: true },
     { type: 'videosUpload', label: '视频', prop: 'url', required: true },
-    // { type: 'videosUpload', label: '封面', prop: 'coverUrl', required: true },
+    { type: 'videosUpload', label: '封面', prop: 'coverUrl', required: true },
   ]
 })
 const visible = ref(false);
@@ -171,22 +171,15 @@ const viewData = ref({
 const handleView = (row: VideoItem) => {
   viewData.value.row = { ...row }
   viewData.value.list = [
-    // {
-    //   prop: 'id',
-    //   label: '文件ID',
-    // },
-    // {
-    //   prop: 'informationId',
-    //   label: '资源ID',
-    // },
+
     {
       prop: 'url',
       label: '视频',
     },
-    //     {
-    //   prop: 'coverUrl',
-    //   label: '封面图',
-    // },
+    {
+      prop: 'coverUrl',
+      label: '封面图',
+    },
     {
       prop: 'weight',
       label: '权重',
